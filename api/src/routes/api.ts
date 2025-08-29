@@ -1,5 +1,8 @@
 import { Router, type Request, type Response } from 'express';
-import { productsRouter } from '../products/routes';
+import { makeProductsRouter } from '../products/routes';
+import { DefaultProductMapper } from '../products/mappers/productMapper';
+import { FileProductRepository } from '../products/repositories/productRepository';
+import { DefaultProductService } from '../products/services/productService';
 
 export const apiRouter = Router();
 
@@ -9,4 +12,7 @@ apiRouter.get('/', (_req: Request, res: Response) => {
 });
 
 // Mount products under /api/products
-apiRouter.use('/products', productsRouter);
+const repo = new FileProductRepository();
+const mapper = new DefaultProductMapper();
+const service = new DefaultProductService(repo, mapper);
+apiRouter.use('/products', makeProductsRouter(service));

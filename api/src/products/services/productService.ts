@@ -1,9 +1,13 @@
 import { ProductDTO } from '../domain/product';
 import { ProductMapper } from '../mappers/productMapper';
 import { ProductRepository } from '../repositories/productRepository';
+import type { ListProductsQuery, ListProductsResult } from '../contracts/listing';
+import { applyFilters } from '../utils/filters';
+import { applySorting } from '../utils/sort';
+import { applyPagination } from '../utils/pagination';
 
 export interface ProductService {
-  list(): Promise<ProductDTO[]>;
+  list(query?: ListProductsQuery): Promise<ListProductsResult>;
   getById(id: string): Promise<ProductDTO | undefined>;
 }
 
@@ -13,9 +17,13 @@ export class DefaultProductService implements ProductService {
     private readonly mapper: ProductMapper
   ) {}
 
-  async list(): Promise<ProductDTO[]> {
+  async list(query: ListProductsQuery = {}): Promise<ListProductsResult> {
     const raws = await this.repo.getAll();
-    return raws.map(r => this.mapper.toDTO(r));
+  const mapped = raws.map(r => this.mapper.toDTO(r));
+  const filtered = applyFilters(mapped, query);
+  const sorted = applySorting(filtered, query);
+  const { items, pageInfo } = applyPagination(sorted, query.page, query.limit);
+  return { items, pageInfo };
   }
 
   async getById(id: string): Promise<ProductDTO | undefined> {

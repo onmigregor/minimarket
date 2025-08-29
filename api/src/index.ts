@@ -1,12 +1,12 @@
 import express from 'express';
 import type { Request, Response } from 'express';
+import { apiRouter } from './routes/api';
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3001;
 
-app.get('/', (_req: Request, res: Response) => {
-  res.json({ name: 'mini-market-api', version: '0.1.0' });
-});
+// Mount unified API under /api
+app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
   console.log(`API listening on http://localhost:${PORT}`);

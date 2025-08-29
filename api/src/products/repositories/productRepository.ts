@@ -4,6 +4,7 @@ import { ProductRaw } from '../domain/product';
 
 export interface ProductRepository {
   getAll(): Promise<ProductRaw[]>;
+  getById(id: number): Promise<ProductRaw | undefined>;
 }
 
 export class FileProductRepository implements ProductRepository {
@@ -25,5 +26,10 @@ export class FileProductRepository implements ProductRepository {
     }
     this.cache = data as ProductRaw[];
     return this.cache;
+  }
+
+  async getById(id: number): Promise<ProductRaw | undefined> {
+    const list = await this.getAll();
+    return list.find(p => p.id === id);
   }
 }

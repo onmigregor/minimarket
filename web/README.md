@@ -11,9 +11,6 @@
 
 ## 2. Cómo levantar el proyecto
 
-
-**Importante:** Antes de iniciar, copia el archivo `.env.local` como `.env` y modifícalo según tu entorno si es necesario.
-
 ```powershell
 # 1) Instalar dependencias
 cd web

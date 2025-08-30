@@ -9,6 +9,13 @@ API REST construida con Express.js y TypeScript para un mini‑market. Sigue una
 - Puerto por defecto: `3001` (configurable con `PORT`).
 
 ## Requisitos de sistema
+
+- Node.js 18 o superior (LTS recomendado).
+- npm 9 o superior.
+- Sistema operativo: Windows, macOS o Linux. En Windows se usa PowerShell.
+- Puerto 3001 libre (o define `PORT`).
+- Git (opcional, para gestión de ramas/commits).
+
 ## Configuración de CORS
 
 El backend valida el origen de las peticiones (CORS) usando la variable `CORS_ORIGIN` definida en el archivo `.env` o `.env.local`. Esto permite controlar desde qué dominio (por ejemplo, el frontend en desarrollo) se aceptan solicitudes.
@@ -17,8 +24,10 @@ Ejemplo de configuración en `.env.local`:
 ```
 CORS_ORIGIN=http://localhost:3000
 ```
+**Importante:** Antes de iniciar, copia el archivo `.env.local` como `.env` y modifícalo según tu entorno si es necesario.
 
 Modifica este valor según el dominio desde el que se harán las peticiones al backend.
+
 - Node.js 18 o superior (LTS recomendado).
 - npm 9 o superior.
 - Sistema operativo: Windows, macOS o Linux. En Windows se usa PowerShell.
@@ -26,9 +35,6 @@ Modifica este valor según el dominio desde el que se harán las peticiones al b
 - Git (opcional, para gestión de ramas/commits).
 
 ## Cómo levantar el proyecto (desarrollo)
-
-
-**Importante:** Antes de iniciar, copia el archivo `.env.local` como `.env` y modifícalo según tu entorno si es necesario.
 
 ```powershell
 # 1) Instalar dependencias

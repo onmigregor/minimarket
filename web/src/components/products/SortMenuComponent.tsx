@@ -32,8 +32,21 @@ export default function SortMenuComponent({ value, onChange }: SortMenuProps) {
     };
   }, [open]);
 
+  function getLabel(val: string) {
+    switch (val) {
+      case 'price-asc': return 'Precio min-max';
+      case 'price-desc': return 'Precio max-min';
+      case 'name-asc': return 'Nombre A-Z';
+      case 'name-desc': return 'Nombre Z-A';
+      default: return '';
+    }
+  }
+
   return (
-    <div className="relative" ref={menuRef}>
+    <div className="relative flex items-center gap-2" ref={menuRef}>
+      <span className="text-blue-600 text-sm font-medium">
+        {getLabel(value)}
+      </span>
       <button
         type="button"
         className="px-4 py-2 border border-gray-300 rounded-lg bg-white flex items-center gap-2 shadow-sm hover:bg-gray-50"

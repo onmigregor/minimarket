@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import ListGridComponent from '../../components/products/ListGridComponent';
-import SearchInputComponent from '../../components/products/SearchInputComponent';
-import SortMenuComponent from '../../components/products/SortMenuComponent';
+import FilterComponent from '../../components/products/FilterComponent';
+import LoadingSpinner from '../../core/components/LoadingSpinner';
 
 export type Product = {
   id: string;
@@ -77,45 +77,16 @@ export default function ProductsPage() {
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-8">Productos</h2>
-      <div className="flex flex-row justify-between py-8">
-        {/* Bloque 1: input y selector */}
-        <div className="flex gap-4 items-center">
-          <div className="w-full">
-            <SearchInputComponent value={search} onChange={setSearch} />
-          </div>
-          <div>
-            <select
-              value={available}
-              onChange={e => setAvailable(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              {availabilityOptions.map(opt => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-        {/* Bloque 2: botón de ordenar y texto azul */}
-        <div className="flex items-center gap-2">
-          <span className="text-blue-600 text-sm font-medium">
-            {(() => {
-              switch (sort) {
-                case 'price-asc': return 'Precio min-max';
-                case 'price-desc': return 'Precio max-min';
-                case 'name-asc': return 'Nombre A-Z';
-                case 'name-desc': return 'Nombre Z-A';
-                default: return '';
-              }
-            })()}
-          </span>
-          <SortMenuComponent value={sort} onChange={setSort} />
-        </div>
-      </div>
-      {loading && (
-        <div className="flex justify-center items-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-        </div>
-      )}
+      <FilterComponent
+        search={search}
+        onSearchChange={setSearch}
+        available={available}
+        onAvailableChange={setAvailable}
+        sort={sort}
+        onSortChange={setSort}
+        availabilityOptions={availabilityOptions}
+      />
+    {loading && <LoadingSpinner />}
       {error && <p className="text-red-600">{error}</p>}
       {!loading && !error && <ListGridComponent products={products} />}
     </main>

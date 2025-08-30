@@ -1,5 +1,4 @@
 # Mini‑Market (Fullstack)
-
 Este repositorio contiene una solución completa para un mini‑market, con aplicaciones separadas para frontend y backend, y utilidades compartidas.
 
 ## Resumen de aplicaciones
@@ -29,5 +28,22 @@ Consulta los siguientes archivos para instrucciones detalladas:
 - [Instalación y uso del frontend](./web/README.md)
 
 ---
+
+## Estado de Cumplimiento y Pendientes
+
+### Cumplido
+- Estructura modular para frontend (Next.js) y backend (Express).
+- Compartición de utilidades y tipos entre frontend y backend.
+- Implementación y documentación de tests unitarios e integración en el backend.
+- Organización y comentarios en los archivos de test.
+- Documentación actualizada en cada módulo y en la raíz.
+
+### Pendiente / Sugerido
+- Ampliar cobertura de tests en el frontend (unitarios y de integración).
+- Mejorar la documentación de los tests en el frontend.
+- Agregar ejemplos de uso de utilidades compartidas en el frontend.
+
+> El proyecto está listo para escalar en cobertura de pruebas y documentación según se requiera.
+
 
 ¿Dudas o problemas? Revisa los README internos y valida tu versión de Node/npm y la disponibilidad de puertos.

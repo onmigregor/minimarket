@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import ListGridComponent from '../../components/products/ListGridComponent';
 import FilterComponent from '../../components/products/FilterComponent';
 import LoadingSpinner from '../../core/components/LoadingSpinner';
+import PaginationComponent from '../../components/products/PaginationComponent';
 
 export type Product = {
   id: string;
@@ -28,6 +29,9 @@ export default function ProductsPage() {
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [available, setAvailable] = useState('');
   const [sort, setSort] = useState('name-asc');
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(8);
+  const [pageInfo, setPageInfo] = useState({ page: 1, limit: 8, total: 0, pages: 1 });
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -58,12 +62,15 @@ export default function ProductsPage() {
           params.push('order=desc');
         }
       }
+      params.push(`page=${page}`);
+      params.push(`limit=${limit}`);
       url += params.join('&');
       if (!params.length) url = 'http://localhost:3001/api/products';
       fetch(url)
         .then(res => res.json())
         .then(data => {
           setProducts(data.items || []);
+          setPageInfo(data.pageInfo || { page: 1, limit, total: 0, pages: 1 });
           setError('');
         })
         .catch(err => {
@@ -72,7 +79,7 @@ export default function ProductsPage() {
         .finally(() => setLoading(false));
     }, 500);
     return () => clearTimeout(timer);
-  }, [debouncedSearch, available, sort]);
+  }, [debouncedSearch, available, sort, page, limit]);
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
@@ -88,7 +95,17 @@ export default function ProductsPage() {
       />
     {loading && <LoadingSpinner />}
       {error && <p className="text-red-600">{error}</p>}
-      {!loading && !error && <ListGridComponent products={products} />}
+      {!loading && !error && <>
+        <ListGridComponent products={products} />
+        <PaginationComponent
+          page={pageInfo.page}
+          pages={pageInfo.pages}
+          onPageChange={setPage}
+          limit={pageInfo.limit}
+          onLimitChange={l => { setLimit(l); setPage(1); }}
+          total={pageInfo.total}
+        />
+      </>}
     </main>
   );
 }

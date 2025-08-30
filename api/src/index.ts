@@ -15,6 +15,11 @@ app.use(cors({ origin: CORS_ORIGIN }));
 // Mount unified API under /api
 app.use('/api', apiRouter);
 
-app.listen(PORT, () => {
-  console.log(`API listening on http://localhost:${PORT}`);
-});
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`API listening on http://localhost:${PORT}`);
+  });
+}
+
+export default app;

@@ -115,3 +115,44 @@ api/
 Notas:
 - Puedes cambiar el puerto con `PORT`. Ej.: `PORT=4000 npm run dev`.
 - Si falla `npm run dev`, valida tu versión de Node/npm y que el puerto esté libre.
+
+## Resumen de Tests Implementados
+
+El backend cuenta con una cobertura de pruebas que incluye:
+
+- **Tests unitarios** para funciones de filtrado y paginación de productos.
+- **Tests de integración** para los endpoints principales:
+  - `/api/products` (con filtros y paginación)
+  - `/api/products/:id` (detalle y manejo de errores)
+  - `/api/top-cheapest` (productos más económicos disponibles)
+
+### Organización
+- Todos los tests se encuentran en `src/__tests__/products/` para facilitar el mantenimiento y la escalabilidad.
+- Cada archivo de test incluye comentarios explicativos sobre la intención y cobertura de las pruebas.
+
+### Buenas prácticas
+- Los tests validan casos exitosos y de error.
+- Se recomienda agregar nuevos casos de prueba conforme se agreguen funcionalidades.
+- La documentación y comentarios en los tests ayudan a entender el propósito de cada uno.
+
+### Ejecución
+Para ejecutar los tests, usa:
+
+```bash
+npm test
+```
+
+Para agregar nuevos tests, crea archivos en `src/__tests__/products/` siguiendo la estructura y ejemplos existentes.
+## Tests
+
+- Los tests unitarios y de integración están en `api/src/__tests__/products`.
+- Para ejecutarlos:
+  ```
+  cd api
+  npm test
+  ```
+- Los tests cubren:
+  - Filtros de productos
+  - Paginación
+  - Endpoints principales de la API
+- Para agregar nuevos tests, crea archivos en la carpeta `products` siguiendo la estructura y comentando cada caso.

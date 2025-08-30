@@ -32,7 +32,7 @@ export default function ProductShowPage() {
   return (
     <main className="max-w-3xl mx-auto px-4 py-8">
       <div className="mb-4 flex flex-col gap-2">
-        <Link href="/products" className="text-blue-600 hover:underline text-sm font-medium">Regresar a mis productos</Link>
+        <Link href="/" className="text-blue-600 hover:underline text-sm font-medium">Regresar a inicio</Link>
         <Link href="/products" className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold w-fit">Productos</Link>
       </div>
       <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col sm:flex-row gap-12 items-center">

@@ -26,13 +26,18 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@shared/*": ["../../shared/*"]
+    }
   },
   "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
+  "next-env.d.ts",
+  "**/*.ts",
+  "**/*.tsx",
+  ".next/types/**/*.ts",
+  "../shared"
   ],
   "exclude": [
     "node_modules"

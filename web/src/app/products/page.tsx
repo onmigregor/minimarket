@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import ListGridComponent from '../../components/products/ListGridComponent';
+import { getTopCheapestAvailable } from '@shared/utils';
 import FilterComponent from '../../components/products/FilterComponent';
 import LoadingSpinner from '../../core/components/LoadingSpinner';
 import PaginationComponent from '../../components/products/PaginationComponent';
@@ -83,6 +84,9 @@ export default function ProductsPage() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
+      <div className="mb-6 flex justify-center">
+        <a href="/" className="text-blue-600 hover:underline text-base font-medium">Regresar a inicio</a>
+      </div>
       <h2 className="text-2xl font-bold mb-8">Productos</h2>
       <FilterComponent
         search={search}
@@ -93,9 +97,10 @@ export default function ProductsPage() {
         onSortChange={setSort}
         availabilityOptions={availabilityOptions}
       />
-    {loading && <LoadingSpinner />}
+      {loading && <LoadingSpinner />}
       {error && <p className="text-red-600">{error}</p>}
       {!loading && !error && <>
+        {/* Listado de los productos más económicos disponibles */}
         <ListGridComponent products={products} />
         <PaginationComponent
           page={pageInfo.page}
